@@ -1,2 +1,2 @@
 # elastic-stack-Launcher
-Gr
+Graphical launcher for the elastic stack
