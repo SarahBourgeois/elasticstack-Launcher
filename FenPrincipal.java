@@ -1,4 +1,4 @@
-package com.bourgeois.launcher;
+package com.bourgeois;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -24,6 +24,7 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
@@ -31,10 +32,9 @@ import javax.swing.SwingConstants;
  * @author: Bourgeois Sarah
  */
 
-public class FenPrincipal extends JFrame implements ActionListener {
+public class WinPrincipal extends JFrame implements ActionListener {
 	private static final long serialVersionUID = 1L;
-	
-	
+
 	// ==========================================
 	// Declare windows and components
 	// ==========================================
@@ -62,6 +62,7 @@ public class FenPrincipal extends JFrame implements ActionListener {
 	JButton btn_connect_kibana;
 	JButton btn_configuration;
 	JButton btn_createcluster;
+	JButton btn_runkibana;
 
 	// Jmenu
 	JMenu men_file;
@@ -74,9 +75,9 @@ public class FenPrincipal extends JFrame implements ActionListener {
 	JMenuItem item_helpConfigure;
 	JMenuItem item_about;
 
-	public FenPrincipal() throws HeadlessException {
+	public WinPrincipal() throws HeadlessException {
 		super();
-		FenConfigure fc = new FenConfigure();
+		WinConfigure fc = new WinConfigure();
 		Configuration conn = new Configuration();
 		// ==========================================
 		// create principal pan
@@ -94,7 +95,6 @@ public class FenPrincipal extends JFrame implements ActionListener {
 		// fondMenu.setBounds(10, 10, 10, 50);
 		JMenuBar menuBar = new JMenuBar();
 
-
 		// Jmenu file
 		men_file = new JMenu("File");
 		men_log = new JMenu("Elastic Log");
@@ -106,12 +106,11 @@ public class FenPrincipal extends JFrame implements ActionListener {
 		// item quit
 		item_quit = new JMenuItem("Quit");
 		men_file.add(item_quit);
-		
 
 		// item open log
 		item_openLog = new JMenuItem("Open elasticsearch log");
 		men_log.add(item_openLog);
-		
+
 		// item help
 		item_helpConfigure = new JMenuItem("help for configuration");
 		men_about.add(item_helpConfigure);
@@ -161,12 +160,18 @@ public class FenPrincipal extends JFrame implements ActionListener {
 
 		// Kibana
 		panKibana = new JPanel();
-		panKibana.setLayout(new GridLayout(1, 1));
+		panKibana.setLayout(new GridLayout(2, 1));
+		// run kibana
+		btn_runkibana = new JButton("launch kibana");
+		panKibana.add(btn_runkibana);
+		btn_runkibana.addActionListener(this);
+		fondBoutonElastic.add(panKibana);
 		// open Kibana
 		btn_connect_kibana = new JButton("open kibana");
 		panKibana.add(btn_connect_kibana);
 		btn_connect_kibana.addActionListener(this);
 		fondBoutonElastic.add(panKibana);
+
 		// Custom
 		panElastic.setBorder(BorderFactory.createLineBorder(Color.GREEN));
 		panElastic.setBorder(BorderFactory.createTitledBorder("Elasticsearch"));
@@ -192,7 +197,6 @@ public class FenPrincipal extends JFrame implements ActionListener {
 		panConfigure.setBorder(BorderFactory.createLineBorder(Color.GREEN));
 		panConfigure.setBorder(BorderFactory.createTitledBorder("Configuration"));
 
-		
 		// ==========================================
 		// add different pan to principal pan
 		// ==========================================
@@ -222,7 +226,6 @@ public class FenPrincipal extends JFrame implements ActionListener {
 			}
 		});
 
-	
 		item_openLog.addActionListener(new ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent e) {
 				Desktop desk = Desktop.getDesktop();
@@ -238,10 +241,11 @@ public class FenPrincipal extends JFrame implements ActionListener {
 
 	// ==========================================
 	// Action Listeners : Button
-	// ==========================================
+	// =========================================
 
 	public void actionPerformed(ActionEvent arg0) {
 		JButton btn = (JButton) (arg0.getSource());
+		// JMenuItem item = (JMenuItem) (arg0.getSource());
 		Configuration conn = new Configuration();
 
 		// *********** Open elasticSearch *****************
@@ -265,20 +269,10 @@ public class FenPrincipal extends JFrame implements ActionListener {
 			try {
 				@SuppressWarnings("unused")
 				Process child = Runtime.getRuntime().exec(command);
-				Desktop desktop = null;
-				java.net.URI url;
-				try {
-					url = new java.net.URI(conn.getElasticHost());
-					if (Desktop.isDesktopSupported()) {
-						desktop = Desktop.getDesktop();
-						desktop.browse(url);
-					}
-				} catch (Exception ex) {
-					Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
-				}
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
+			JOptionPane.showMessageDialog(null, "Node elastic create. If your configuration file is ok, you can now open ElasticSearch .");
 		}
 
 		// ************* Open kibana **************
@@ -296,12 +290,26 @@ public class FenPrincipal extends JFrame implements ActionListener {
 			}
 		}
 
+		if (btn_runkibana.getText().equals("launch kibana")) {
+			String command = conn.getKibanaHost() + "./kibana";
+			try {
+				@SuppressWarnings("unused")
+				Process child = Runtime.getRuntime().exec(command);
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+			JOptionPane.showMessageDialog(null, "If your config is ok, Kibana can now be open.");
+		}
 		// *************** Configure **********************
 		if (btn.getText().equals("Configure")) {
-			new FenConfigure().setVisible(true);
+			new WinConfigure().setVisible(true);
 		}
 
-	} // end of action listenners
+		// if (item.getText().equals("about the application")){
+		// WinHelp help = new WinHelp();
+		// help.setVisible(true);
+		// }
 
+	} // end of action listenners
 
 } // end of class
