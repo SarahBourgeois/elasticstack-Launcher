@@ -1,4 +1,4 @@
-package com.bourgeois.launcher;
+package com.bourgeois.GraphicWindow;
 
 import java.awt.Color;
 import java.awt.GridBagLayout;
@@ -19,7 +19,10 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-public class FenConfigure extends JFrame {
+import com.bourgeois.configuration.Configuration;
+
+
+public class WinConfigure extends JFrame {
 	private static final long serialVersionUID = 1L;
 
 	// ==========================================
@@ -72,13 +75,13 @@ public class FenConfigure extends JFrame {
 	JButton btn_kibana_host;
 	JButton btn_kibana_loc;
 	JButton btn_log;
-	
+
 	// chekbox
 	JCheckBox check_plugin;
 
 	JButton btn_validate;
 
-	public FenConfigure() throws HeadlessException {
+	public WinConfigure() throws HeadlessException {
 		super();
 
 		Configuration conn = new Configuration();
@@ -94,13 +97,14 @@ public class FenConfigure extends JFrame {
 		// ==========================================
 		// first block : elasticsearch configuration
 		// ==========================================
-
 		fondElastic = new JPanel();
 		fondElastic.setLayout(new GridLayout(3, 1));
+		
 
 		// ******** Host Elastic *******
 		panElasticSaisiHost = new JPanel();
 		panElasticSaisiHost.setLayout(new GridLayout(1, 3));
+	
 		// Text
 		txt_elastic_host = new JLabel("your elasticsearch output host : ");
 		panElasticSaisiHost.add(txt_elastic_host);
@@ -129,25 +133,15 @@ public class FenConfigure extends JFrame {
 		btn_elastic_loc = new JButton("edit");
 		panElasticSaisiLoc.add(btn_elastic_loc);
 		fondElastic.add(panElasticSaisiLoc);
-		
-		
-		//************ Plugin head ********************** 
-		panPlugin = new JPanel();
-		panPlugin.setLayout(new GridLayout(1,1));
-		check_plugin = new JCheckBox("plugin head");
-		panPlugin.add(check_plugin);
-		fondElastic.add(panPlugin);
-		
+
+
 		// Custom
-		fondElastic.setBorder(BorderFactory.createLineBorder(Color.BLUE));
 		fondElastic.setBorder(BorderFactory.createTitledBorder("ElasticSearch"));
-		
-		
+	
 
 		// ==========================================
 		// second block : kibana configuration
 		// ==========================================
-
 		// secondary pan
 		fondKibana = new JPanel();
 		fondKibana.setLayout(new GridLayout(2, 1));
@@ -190,7 +184,7 @@ public class FenConfigure extends JFrame {
 		// ==========================================
 		// third block : log
 		// ==========================================
-	
+
 		fondLog = new JPanel();
 		fondLog.setLayout(new GridLayout(2, 1));
 
@@ -210,7 +204,6 @@ public class FenConfigure extends JFrame {
 		panLogSaisi.add(btn_log);
 		fondLog.add(panLogSaisi);
 		// Custom
-		fondLog.setBorder(BorderFactory.createLineBorder(Color.BLUE));
 		fondLog.setBorder(BorderFactory.createTitledBorder("Logger Configuration"));
 
 		// ==========================================
@@ -231,7 +224,7 @@ public class FenConfigure extends JFrame {
 		// Action listeners
 		// ==========================================
 
-		// *********** elastic Host ***************** **********		
+		// *********** elastic Host ***************** **********
 		btn_elastic_host.addActionListener(new ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent e) {
 				String saisie = JOptionPane.showInputDialog(null, "edit elasticsearch host", conn.getElasticHost());
@@ -240,7 +233,6 @@ public class FenConfigure extends JFrame {
 				try {
 					stream = new FileInputStream(fProp);
 				} catch (FileNotFoundException e3) {
-					// TODO Auto-generated catch block
 					e3.printStackTrace();
 				}
 				try {
@@ -256,13 +248,11 @@ public class FenConfigure extends JFrame {
 				try {
 					oStream = new FileOutputStream(fProp);
 				} catch (FileNotFoundException e2) {
-					// TODO Auto-generated catch block
 					e2.printStackTrace();
 				}
 				try {
 					prop.store(oStream, saisie);
 				} catch (IOException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
@@ -271,7 +261,8 @@ public class FenConfigure extends JFrame {
 		// *********** Elastic localization *****************
 		btn_elastic_loc.addActionListener(new ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent e) {
-				String saisie = JOptionPane.showInputDialog(null, "edit elasticsearch location", conn.getElasticLocation());
+				String saisie = JOptionPane.showInputDialog(null, "edit elasticsearch location",
+						conn.getElasticLocation());
 				sais_elastic_loc.setText(saisie);
 				FileInputStream stream = null;
 				try {
@@ -306,8 +297,8 @@ public class FenConfigure extends JFrame {
 		// *********** Log Configuration *****************
 		btn_log.addActionListener(new ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent e) {
-				String saisie = JOptionPane.showInputDialog(null, "edit log path", conn.getPathLog());
-				sai_log.setText(saisie);
+				String userConfig = JOptionPane.showInputDialog(null, "edit log path", conn.getPathLog());
+				sai_log.setText(userConfig);
 
 				FileInputStream stream = null;
 				try {
@@ -323,8 +314,8 @@ public class FenConfigure extends JFrame {
 					e3.printStackTrace();
 				}
 
-				String taNouvelleValeur = saisie;
-				prop.setProperty("path.log", taNouvelleValeur);
+				String newValue = userConfig;
+				prop.setProperty("path.log", newValue);
 
 				FileOutputStream oStream = null;
 				try {
@@ -333,7 +324,7 @@ public class FenConfigure extends JFrame {
 					e2.printStackTrace();
 				}
 				try {
-					prop.store(oStream, saisie);
+					prop.store(oStream, userConfig);
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
@@ -343,9 +334,8 @@ public class FenConfigure extends JFrame {
 		// *********** Kibana Host *****************
 		btn_kibana_host.addActionListener(new ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent e) {
-				String saisie = JOptionPane.showInputDialog(null, "edit elasticsearch host", conn.getKibanaHost());
-				sais_kibana_host.setText(saisie);
-
+				String userConfig = JOptionPane.showInputDialog(null, "edit elasticsearch host", conn.getKibanaHost());
+				sais_kibana_host.setText(userConfig);
 				FileInputStream stream = null;
 				try {
 					stream = new FileInputStream(fProp);
@@ -357,8 +347,8 @@ public class FenConfigure extends JFrame {
 				} catch (IOException e3) {
 					e3.printStackTrace();
 				}
-				String taNouvelleValeur = saisie;
-				prop.setProperty("kibana.host", taNouvelleValeur);
+				String newValue = userConfig;
+				prop.setProperty("kibana.host", newValue);
 				FileOutputStream oStream = null;
 				try {
 					oStream = new FileOutputStream(fProp);
@@ -366,7 +356,7 @@ public class FenConfigure extends JFrame {
 					e2.printStackTrace();
 				}
 				try {
-					prop.store(oStream, saisie);
+					prop.store(oStream, userConfig);
 				} catch (IOException e1) {
 
 					e1.printStackTrace();
@@ -374,7 +364,7 @@ public class FenConfigure extends JFrame {
 			}
 		});
 
-		// *********** Localization Kibana *****************
+		// *********** Location Kibana *****************
 		btn_kibana_loc.addActionListener(new ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent e) {
 				String saisie = JOptionPane.showInputDialog(null, "edit kibana location", conn.getKibanaLocation());
@@ -389,7 +379,6 @@ public class FenConfigure extends JFrame {
 				try {
 					prop.load(stream);
 				} catch (IOException e3) {
-					// TODO Auto-generated catch block
 					e3.printStackTrace();
 				}
 				String taNouvelleValeur = saisie;
@@ -409,58 +398,14 @@ public class FenConfigure extends JFrame {
 
 			}
 		});
-
+	
 		// ******** Button validate **********
 		btn_validate.addActionListener(new ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent e) {
 				setVisible(false);
 			}
 		});
-		
-		check_plugin.addActionListener(new ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent e) {
-				String saisie = "";
-				
-				FileInputStream stream = null;
-				try {
-					stream = new FileInputStream(fProp);
-				} catch (FileNotFoundException e3) {
-					// TODO Auto-generated catch block
-					e3.printStackTrace();
-				}
-				try {
-					prop.load(stream);
-				} catch (IOException e3) {
-					// TODO Auto-generated catch block
-					e3.printStackTrace();
-				}
 
-				if (check_plugin.isSelected()) {
-					saisie = "/_plugin/head/";
-					prop.setProperty("elastic.plugin", saisie);
-				}
-				else {
-					saisie = "";
-				}
-				
-
-				FileOutputStream oStream = null;
-				try {
-					oStream = new FileOutputStream(fProp);
-				} catch (FileNotFoundException e2) {
-					// TODO Auto-generated catch block
-					e2.printStackTrace();
-				}
-				try {
-					prop.store(oStream, saisie);
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-			}
-			
-			
-		});
 
 		// ==========================================
 		// add different pan to principal pan

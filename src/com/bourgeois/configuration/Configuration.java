@@ -1,4 +1,4 @@
-package com.bourgeois.launcher;
+package com.bourgeois.configuration;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -19,7 +19,6 @@ public class Configuration {
 		InputStream input = null;
 
 		try {
-
 			input = new FileInputStream("config.properties");
 			// load a properties file
 			prop.load(input);

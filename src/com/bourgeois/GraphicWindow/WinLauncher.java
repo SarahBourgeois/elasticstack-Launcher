@@ -1,4 +1,4 @@
-package com.bourgeois;
+package com.bourgeois.GraphicWindow;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -27,12 +27,15 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+import javax.swing.Timer;
+
+import com.bourgeois.configuration.Configuration;
 
 /*
  * @author: Bourgeois Sarah
  */
 
-public class WinPrincipal extends JFrame implements ActionListener {
+public class WinLauncher extends JFrame implements ActionListener {
 	private static final long serialVersionUID = 1L;
 
 	// ==========================================
@@ -75,14 +78,13 @@ public class WinPrincipal extends JFrame implements ActionListener {
 	JMenuItem item_helpConfigure;
 	JMenuItem item_about;
 
-	public WinPrincipal() throws HeadlessException {
+	public WinLauncher() throws HeadlessException {
 		super();
-		WinConfigure fc = new WinConfigure();
+
 		Configuration conn = new Configuration();
 		// ==========================================
 		// create principal pan
 		// ==========================================
-
 		principalPan = new JPanel();
 		principalPan.setLayout(new GridLayout(5, 3));
 
@@ -92,7 +94,6 @@ public class WinPrincipal extends JFrame implements ActionListener {
 		// JmenuBar
 		fondMenu = new JPanel();
 		fondMenu.setLayout(new BorderLayout());
-		// fondMenu.setBounds(10, 10, 10, 50);
 		JMenuBar menuBar = new JMenuBar();
 
 		// Jmenu file
@@ -140,7 +141,6 @@ public class WinPrincipal extends JFrame implements ActionListener {
 		// ==========================================
 		// Second block : Elasticsearch and Kibana
 		// ==========================================
-
 		fondBoutonElastic = new JPanel();
 		fondBoutonElastic.setLayout(new GridLayout(1, 2));
 
@@ -242,10 +242,8 @@ public class WinPrincipal extends JFrame implements ActionListener {
 	// ==========================================
 	// Action Listeners : Button
 	// =========================================
-
 	public void actionPerformed(ActionEvent arg0) {
 		JButton btn = (JButton) (arg0.getSource());
-		// JMenuItem item = (JMenuItem) (arg0.getSource());
 		Configuration conn = new Configuration();
 
 		// *********** Open elasticSearch *****************
@@ -263,18 +261,6 @@ public class WinPrincipal extends JFrame implements ActionListener {
 			}
 		}
 
-		// ************ Run elasticSearh ********************
-		if (btn.getText().equals("create node elastic")) {
-			String command = conn.getElasticLocation() + "./elasticsearch";
-			try {
-				@SuppressWarnings("unused")
-				Process child = Runtime.getRuntime().exec(command);
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}
-			JOptionPane.showMessageDialog(null, "Node elastic create. If your configuration file is ok, you can now open ElasticSearch .");
-		}
-
 		// ************* Open kibana **************
 		if (btn.getText().equals("open kibana")) {
 			Desktop desktop = null;
@@ -284,31 +270,47 @@ public class WinPrincipal extends JFrame implements ActionListener {
 				if (Desktop.isDesktopSupported()) {
 					desktop = Desktop.getDesktop();
 					desktop.browse(url);
+					Timer timer = new Timer(1000, this);
+
+					timer = new Timer(1000, this);
+					timer.start();
 				}
 			} catch (Exception ex) {
 				Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
 			}
 		}
 
+		// **************** launch kibana **********************
 		if (btn_runkibana.getText().equals("launch kibana")) {
-			String command = conn.getKibanaHost() + "./kibana";
+			String command = conn.getKibanaLocation() + "./kibana";
+			try {
+				@SuppressWarnings("unused")
+				Process child = Runtime.getRuntime().exec(command);
+
+				JOptionPane.showMessageDialog(null, "If your config is ok, Kibana can now be open.");
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+
+		}
+
+		// ************ launch elasticSearh ********************
+		if (btn.getText().equals("create node elastic")) {
+			String command = conn.getElasticLocation() + "./elasticsearch";
 			try {
 				@SuppressWarnings("unused")
 				Process child = Runtime.getRuntime().exec(command);
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
-			JOptionPane.showMessageDialog(null, "If your config is ok, Kibana can now be open.");
+			JOptionPane.showMessageDialog(null,
+					"Node elastic create. If your configuration file is ok, you can now open ElasticSearch .");
 		}
+
 		// *************** Configure **********************
 		if (btn.getText().equals("Configure")) {
 			new WinConfigure().setVisible(true);
 		}
-
-		// if (item.getText().equals("about the application")){
-		// WinHelp help = new WinHelp();
-		// help.setVisible(true);
-		// }
 
 	} // end of action listenners
 
