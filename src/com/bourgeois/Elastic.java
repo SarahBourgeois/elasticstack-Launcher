@@ -1,4 +1,4 @@
-package com.bourgeois.engine;
+package com.bourgeois;
 
 import com.bourgeois.GraphicWindow.WinLauncher;
 

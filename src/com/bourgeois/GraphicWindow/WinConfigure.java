@@ -21,65 +21,8 @@ import javax.swing.JPanel;
 
 import com.bourgeois.configuration.Configuration;
 
-
 public class WinConfigure extends JFrame {
 	private static final long serialVersionUID = 1L;
-
-	// ==========================================
-	// Declare windows and components
-	// ==========================================
-
-	// principal pan
-	JPanel principalPanConf;
-
-	// secondary pan
-	JPanel fondElastic;
-	JPanel fondKibana;
-	JPanel fondValidate;
-	JPanel fondLog;
-
-	// Component pan
-	JPanel panElasticTextLoc;
-	JPanel panElasticSaisiLoc;
-	JPanel panElasticTextHost;
-	JPanel panElasticSaisiHost;
-	JPanel panKibanaTextLoc;
-	JPanel panKibanaSaisiLoc;
-	JPanel panKibanaTextHost;
-	JPanel panKibanaSaisiHost;
-	JPanel panLogSaisi;
-	JPanel panLogText;
-	JPanel panValidate;
-	JPanel panPlugin;
-
-	// ********** components *****************
-	// elastic
-	JLabel txt_elastic_loc;
-	JLabel sais_elastic_loc;
-	JLabel txt_elastic_host;
-	JLabel sais_elastic_host;
-
-	// kibana
-	JLabel txt_kibana_host;
-	JLabel sais_kibana_host;
-	JLabel txt_kibana_loc;
-	JLabel sais_kibana_loc;
-
-	// log
-	JLabel txt_log;
-	JLabel sai_log;
-
-	// button
-	JButton btn_elastic_host;
-	JButton btn_elastic_loc;
-	JButton btn_kibana_host;
-	JButton btn_kibana_loc;
-	JButton btn_log;
-
-	// chekbox
-	JCheckBox check_plugin;
-
-	JButton btn_validate;
 
 	public WinConfigure() throws HeadlessException {
 		super();
@@ -91,90 +34,87 @@ public class WinConfigure extends JFrame {
 		// ==========================================
 		// create principal pan
 		// ==========================================
-		principalPanConf = new JPanel();
+		JPanel principalPanConf = new JPanel();
 		principalPanConf.setLayout(new GridLayout(4, 3));
 
 		// ==========================================
 		// first block : elasticsearch configuration
 		// ==========================================
-		fondElastic = new JPanel();
+		JPanel fondElastic = new JPanel();
 		fondElastic.setLayout(new GridLayout(3, 1));
-		
 
 		// ******** Host Elastic *******
-		panElasticSaisiHost = new JPanel();
+		JPanel panElasticSaisiHost = new JPanel();
 		panElasticSaisiHost.setLayout(new GridLayout(1, 3));
-	
+
 		// Text
-		txt_elastic_host = new JLabel("your elasticsearch output host : ");
+		JLabel txt_elastic_host = new JLabel("your elasticsearch output host : ");
 		panElasticSaisiHost.add(txt_elastic_host);
 		fondElastic.add(panElasticSaisiHost);
 		// Field
-		sais_elastic_host = new JLabel(conn.getElasticHost());
+		JLabel sais_elastic_host = new JLabel(conn.getElasticHost());
 		panElasticSaisiHost.add(sais_elastic_host);
 		fondElastic.add(panElasticSaisiHost);
 		// Buttons
-		btn_elastic_host = new JButton("edit");
+		JButton btn_elastic_host = new JButton("edit");
 		panElasticSaisiHost.add(btn_elastic_host);
 		fondElastic.add(panElasticSaisiHost);
 
 		// ******** Elastic Location *******
-		panElasticSaisiLoc = new JPanel();
+		JPanel panElasticSaisiLoc = new JPanel();
 		panElasticSaisiLoc.setLayout(new GridLayout(1, 3));
 		// Text
-		txt_elastic_loc = new JLabel("your elasticsearch location  : ");
+		JLabel txt_elastic_loc = new JLabel("your elasticsearch location  : ");
 		panElasticSaisiLoc.add(txt_elastic_loc);
 		fondElastic.add(panElasticSaisiLoc);
 		// Field
-		sais_elastic_loc = new JLabel(conn.getElasticLocation());
+		JLabel sais_elastic_loc = new JLabel(conn.getElasticLocation());
 		panElasticSaisiLoc.add(sais_elastic_loc);
 		fondElastic.add(panElasticSaisiLoc);
 		// Buttons
-		btn_elastic_loc = new JButton("edit");
+		JButton btn_elastic_loc = new JButton("edit");
 		panElasticSaisiLoc.add(btn_elastic_loc);
 		fondElastic.add(panElasticSaisiLoc);
 
-
 		// Custom
 		fondElastic.setBorder(BorderFactory.createTitledBorder("ElasticSearch"));
-	
 
 		// ==========================================
 		// second block : kibana configuration
 		// ==========================================
 		// secondary pan
-		fondKibana = new JPanel();
+		JPanel fondKibana = new JPanel();
 		fondKibana.setLayout(new GridLayout(2, 1));
 
 		// ******** Host Kibana *******
-		panKibanaSaisiHost = new JPanel();
+		JPanel panKibanaSaisiHost = new JPanel();
 		panKibanaSaisiHost.setLayout(new GridLayout(1, 3));
 		// Text
-		txt_kibana_host = new JLabel("your Kibana output host : ");
+		JLabel txt_kibana_host = new JLabel("your Kibana output host : ");
 		panKibanaSaisiHost.add(txt_kibana_host);
 		fondKibana.add(panKibanaSaisiHost);
 		// Field
-		sais_kibana_host = new JLabel(conn.getKibanaHost());
+		JLabel sais_kibana_host = new JLabel(conn.getKibanaHost());
 		panKibanaSaisiHost.add(sais_kibana_host);
 		fondKibana.add(panKibanaSaisiHost);
 		// Buttons
-		btn_kibana_host = new JButton("edit");
+		JButton btn_kibana_host = new JButton("edit");
 		panKibanaSaisiHost.add(btn_kibana_host);
 		fondKibana.add(panKibanaSaisiHost);
 
 		// ******** Kibana location *******
-		panKibanaSaisiLoc = new JPanel();
+		JPanel panKibanaSaisiLoc = new JPanel();
 		panKibanaSaisiLoc.setLayout(new GridLayout(1, 3));
 		// Text
-		txt_kibana_loc = new JLabel("your Kibana location in computer : ");
+		JLabel txt_kibana_loc = new JLabel("your Kibana location in computer : ");
 		panKibanaSaisiLoc.add(txt_kibana_loc);
 		fondKibana.add(panKibanaSaisiLoc);
 		// Field
-		sais_kibana_loc = new JLabel(conn.getKibanaLocation());
+		JLabel sais_kibana_loc = new JLabel(conn.getKibanaLocation());
 		panKibanaSaisiLoc.add(sais_kibana_loc);
 		fondKibana.add(panKibanaSaisiLoc);
 		// Button
-		btn_kibana_loc = new JButton("edit");
+		JButton btn_kibana_loc = new JButton("edit");
 		panKibanaSaisiLoc.add(btn_kibana_loc);
 		fondKibana.add(panKibanaSaisiLoc);
 		// Custom
@@ -185,22 +125,22 @@ public class WinConfigure extends JFrame {
 		// third block : log
 		// ==========================================
 
-		fondLog = new JPanel();
+		JPanel fondLog = new JPanel();
 		fondLog.setLayout(new GridLayout(2, 1));
 
 		// ******** Host Elastic *******
-		panLogSaisi = new JPanel();
+		JPanel panLogSaisi = new JPanel();
 		panLogSaisi.setLayout(new GridLayout(1, 3));
 		// Text
-		txt_log = new JLabel("your path log : ");
+		JLabel txt_log = new JLabel("your path log : ");
 		panLogSaisi.add(txt_log);
 		fondLog.add(panLogSaisi);
 		// Field
-		sai_log = new JLabel(conn.getPathLog());
+		JLabel sai_log = new JLabel(conn.getPathLog());
 		panLogSaisi.add(sai_log);
 		fondLog.add(panLogSaisi);
 		// Buttons
-		btn_log = new JButton("edit");
+		JButton btn_log = new JButton("edit");
 		panLogSaisi.add(btn_log);
 		fondLog.add(panLogSaisi);
 		// Custom
@@ -210,13 +150,13 @@ public class WinConfigure extends JFrame {
 		// fourth block : kibana configuration
 		// ==========================================
 
-		fondValidate = new JPanel();
+		JPanel fondValidate = new JPanel();
 		fondValidate.setLayout(new GridLayout(1, 1));
 
 		// Validate
-		panValidate = new JPanel();
+		JPanel panValidate = new JPanel();
 		panValidate.setLayout(new GridBagLayout());
-		btn_validate = new JButton("Exit");
+		JButton btn_validate = new JButton("Exit");
 		panValidate.add(btn_validate);
 		fondValidate.add(panValidate);
 
@@ -398,14 +338,13 @@ public class WinConfigure extends JFrame {
 
 			}
 		});
-	
+
 		// ******** Button validate **********
 		btn_validate.addActionListener(new ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent e) {
 				setVisible(false);
 			}
 		});
-
 
 		// ==========================================
 		// add different pan to principal pan
@@ -426,17 +365,6 @@ public class WinConfigure extends JFrame {
 
 	} // end of constructor
 
-	// getters and setters
-	public JLabel getSais_elastic_loc() {
-		return sais_elastic_loc;
-	}
 
-	public JLabel getSais_kibana_host() {
-		return sais_kibana_host;
-	}
-
-	public JLabel getSais_kibana_loc() {
-		return sais_kibana_loc;
-	}
 
 } // end of class
