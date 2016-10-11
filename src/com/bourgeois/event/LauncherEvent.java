@@ -5,46 +5,47 @@ import java.awt.Menu;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-
-import com.bourgeois.GraphicWindow.WinConfigure;
-import com.bourgeois.GraphicWindow.WinLauncher;
 import com.bourgeois.configuration.Configuration;
-import com.bourgeois.displayText.WinLauncherText;
+import com.bourgeois.graphicWindow.WinConfigure;
+
 
 public class LauncherEvent extends JFrame implements ActionListener {
 	private static final long serialVersionUID = 1L;
 	private static final String commandKibana = "./kibana";
 	private static final String commandElastic = "./elasticsearch";
+	private static final String killCommand = "pkill -f elasticsearch";
+	private static final ResourceBundle bundle = ResourceBundle.getBundle("domaine.ressources");
+
 
 	public void actionPerformed(ActionEvent e) {
-
 		JButton btn = (JButton) (e.getSource());
 		Configuration conn = new Configuration();
-
-		if (btn.getText().equals(WinLauncherText.getButtonOpenElastic())) {
+		
+		
+		if (btn.getText().equals(bundle.getString("openelastic.button"))) {
 			OpenStack(conn.getElasticHost());
 		}
-
-		if (btn.getText().equals(WinLauncherText.getButtonOpenKibana())) {
+		if (btn.getText().equals(bundle.getString("openkibana.button"))) {
 			OpenStack(conn.getKibanaHost());
 		}
-
-		if (btn.getText().equals(WinLauncherText.getButtonLaunchKibana())) {
-			RunStack(conn.getKibanaLocation(), commandKibana, WinLauncherText.getKibanaNodeValidation());
+		if (btn.getText().equals(bundle.getString("runkibana.button"))) {
+			RunStack(conn.getKibanaLocation(), commandKibana, bundle.getString("kibanaValidation.pane"));
 		}
-
-		if (btn.getText().equals(WinLauncherText.getButtoncreateNodeElastic())) {
-			RunStack(conn.getElasticLocation(), commandElastic,
-					WinLauncherText.getElasticNodeValidation());
+		if (btn.getText().equals(bundle.getString("createnode.elastic.button"))) {
+			RunStack(conn.getElasticLocation(), commandElastic, bundle.getString("elasticValidation.pane"));
 		}
-
-		if (btn.getText().equals(WinLauncherText.getButtonConfigure())) {
+		if (btn.getText().equals(bundle.getString("configure.button"))) {
 			new WinConfigure().setVisible(true);
+
+		}
+		if (btn.getText().equals(bundle.getString("killprocess.pan"))) {
+			killStackProcess(killCommand, "Process kill");
 		}
 	}
 
@@ -71,5 +72,18 @@ public class LauncherEvent extends JFrame implements ActionListener {
 			Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
 		}
 	}
+	
+	public static void killStackProcess(String commandKill, String validation){
+		String command = commandKill;
+		try {
+			Runtime.getRuntime().exec(command);
+			JOptionPane.showMessageDialog(null, validation);
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+	}
+	
 
 } // end of class
+
+

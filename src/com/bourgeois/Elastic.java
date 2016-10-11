@@ -1,6 +1,6 @@
 package com.bourgeois;
 
-import com.bourgeois.GraphicWindow.WinLauncher;
+import com.bourgeois.graphicWindow.WinLauncher;
 
 public class Elastic {
 

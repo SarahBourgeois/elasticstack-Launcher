@@ -1,4 +1,4 @@
-package com.bourgeois.GraphicWindow;
+package com.bourgeois.graphicWindow;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -45,7 +45,6 @@ public class WinHelp extends JFrame {
 		// ==========================================
 		// add different pan to principal pan
 		// ==========================================
-		
 		this.setContentPane(principalPan);
 
 		// ==========================================

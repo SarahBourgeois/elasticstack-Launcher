@@ -13,11 +13,11 @@ public class Configuration {
 	private String kibanaHost;
 	private String pathLog;
 	private String plugin;
-
+	private static final String  propertiesFile = "config.properties";
+	
 	public Configuration() {
 		final Properties prop = new Properties();
 		InputStream input = null;
-
 		try {
 			input = new FileInputStream("config.properties");
 			// load a properties file
@@ -28,7 +28,6 @@ public class Configuration {
 			kibanaHost = prop.getProperty("kibana.host");
 			pathLog = prop.getProperty("path.log");
 			plugin = prop.getProperty("elastic.plugin");
-
 		} catch (final IOException ex) {
 			ex.printStackTrace();
 		} finally {
@@ -48,28 +47,41 @@ public class Configuration {
 	public String getElasticLocation() {
 		return elasticLocation;
 	}
-
 	public String getPlugin() {
 		return plugin;
 	}
-
 	public void setPlugin(String plugin) {
 		this.plugin = plugin;
 	}
-
 	public String getElasticHost() {
 		return elasticHost;
 	}
-
+	public void setElasticLocation(String elasticLocation) {
+		this.elasticLocation = elasticLocation;
+	}
+	public void setElasticHost(String elasticHost) {
+		this.elasticHost = elasticHost;
+	}
+	public void setKibanaLocation(String kibanaLocation) {
+		this.kibanaLocation = kibanaLocation;
+	}
+	public void setKibanaHost(String kibanaHost) {
+		this.kibanaHost = kibanaHost;
+	}
+	public void setPathLog(String pathLog) {
+		this.pathLog = pathLog;
+	}
 	public String getKibanaLocation() {
 		return kibanaLocation;
 	}
-
 	public String getKibanaHost() {
 		return kibanaHost;
 	}
 	public String getPathLog() {
 		return pathLog;
 	}
+	public static String getPropertiesfile() {
+		return propertiesFile;
+	}
 
-} // end of class
+} 

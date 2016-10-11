@@ -1,4 +1,4 @@
-package com.bourgeois.GraphicWindow;
+package com.bourgeois.graphicWindow;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ResourceBundle;
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -22,31 +23,30 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-import com.bourgeois.displayText.WinLauncherText;
 import com.bourgeois.event.LaucherItemEvent;
 import com.bourgeois.event.LauncherEvent;
 
-
-/*
- * @author: Bourgeois Sarah
+/**
+ * 
+ * @author Sarah Bourgeois
+ *
  */
 
-public class WinLauncher extends JFrame implements ActionListener {
+public class WinLauncher extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private static final String picturePath = "Ressources/nudge45.png";
-	
+	final ResourceBundle bundle = ResourceBundle.getBundle("domaine.ressources");
 	LauncherEvent launcherEvent = new LauncherEvent();
 	LaucherItemEvent launcherItem = new LaucherItemEvent();
 
 	public WinLauncher() throws HeadlessException {
 		super();
 
-		// principal pan
 		JPanel principalPan = new JPanel();
 		principalPan.setLayout(new GridLayout(5, 3));
 
 		// ======================
-		// Block : Menu
+		// Menu
 		// ======================
 		// JmenuBar
 		JPanel fondMenu = new JPanel();
@@ -54,33 +54,33 @@ public class WinLauncher extends JFrame implements ActionListener {
 		JMenuBar menuBar = new JMenuBar();
 
 		// Jmenu file (principal tool bar)
-		JMenu men_file = new JMenu("File");
-		JMenu men_log = new JMenu("Elastic Log");
-		JMenu men_about = new JMenu("Help");
+		JMenu men_file = new JMenu(bundle.getString("file.jmenu"));
+		JMenu men_log = new JMenu(bundle.getString("log.jmenu"));
+		JMenu men_about = new JMenu(bundle.getString("help.jmenu"));
 		menuBar.add(men_file);
 		menuBar.add(men_log);
 		menuBar.add(men_about);
 
 		// item quit
-		JMenuItem item_quit = new JMenuItem(WinLauncherText.getItemQuit());
+		JMenuItem item_quit = new JMenuItem(bundle.getString("quit.item"));
 		item_quit.addActionListener(launcherItem);
 		men_file.add(item_quit);
 
 		// item open log
-		JMenuItem item_openLog = new JMenuItem("Open elasticsearch log");
+		JMenuItem item_openLog = new JMenuItem(bundle.getString("openlog.item"));
 		item_openLog.addActionListener(launcherItem);
 		men_log.add(item_openLog);
 
 		// item help
-		JMenuItem item_helpConfigure = new JMenuItem("help for configuration");
+		JMenuItem item_helpConfigure = new JMenuItem(bundle.getString("help.item"));
 		men_about.add(item_helpConfigure);
 		// about
-		JMenuItem item_about = new JMenuItem("about the application");
+		JMenuItem item_about = new JMenuItem(bundle.getString("about.item"));
 		men_about.addSeparator();
 		men_about.add(item_about);
 
 		// ==========================================
-		// first block : Picture
+		// Picture
 		// ==========================================
 		JPanel fondPicture = new JPanel();
 		fondPicture.setLayout(new GridLayout(1, 1));
@@ -99,63 +99,72 @@ public class WinLauncher extends JFrame implements ActionListener {
 		fondPicture.add(photo);
 
 		// ==========================================
-		// Second block : Elasticsearch and Kibana
+		// Elasticsearch and Kibana
 		// ==========================================
 		JPanel fondElasticButton = new JPanel();
 		fondElasticButton.setLayout(new GridLayout(1, 2));
 
-		// Elasticsearch
+		// *** Elasticsearch ***
 		JPanel panElastic = new JPanel();
 		panElastic.setLayout(new GridLayout(2, 1));
 		// Create cluster
-		JButton btn_createcluster = new JButton(WinLauncherText.getButtoncreateNodeElastic());
+		JButton btn_createcluster = new JButton(bundle.getString("createnode.elastic.button"));
 		panElastic.add(btn_createcluster);
 		btn_createcluster.addActionListener(launcherEvent);
 		fondElasticButton.add(panElastic);
 		// Open elastic
-		JButton btn_connect_elastic = new JButton(WinLauncherText.getButtonOpenElastic());
+		JButton btn_connect_elastic = new JButton(bundle.getString("openelastic.button"));
 		panElastic.add(btn_connect_elastic);
 		btn_connect_elastic.addActionListener(launcherEvent);
 		fondElasticButton.add(panElastic);
-
-		// Kibana
+		
+		// *** Kibana ***
 		JPanel panKibana = new JPanel();
 		panKibana.setLayout(new GridLayout(2, 1));
 		// run kibana
-		JButton btn_runkibana = new JButton(WinLauncherText.getButtonLaunchKibana());
+		JButton btn_runkibana = new JButton(bundle.getString("runkibana.button"));
 		panKibana.add(btn_runkibana);
 		btn_runkibana.addActionListener(launcherEvent);
 		fondElasticButton.add(panKibana);
 		// open Kibana
-		JButton btn_connect_kibana = new JButton(WinLauncherText.getButtonOpenKibana());
+		JButton btn_connect_kibana = new JButton(bundle.getString("openkibana.button"));
 		panKibana.add(btn_connect_kibana);
 		btn_connect_kibana.addActionListener(launcherEvent);
 		fondElasticButton.add(panKibana);
-
 		// Custom
 		panElastic.setBorder(BorderFactory.createLineBorder(Color.GREEN));
-		panElastic.setBorder(BorderFactory.createTitledBorder("Elasticsearch"));
+		panElastic.setBorder(BorderFactory.createTitledBorder(bundle.getString("elastic.border")));
 		panKibana.setBorder(BorderFactory.createLineBorder(Color.BLUE));
-		panKibana.setBorder(BorderFactory.createTitledBorder("Kibana"));
+		panKibana.setBorder(BorderFactory.createTitledBorder(bundle.getString("kibana.border")));
 		fondElasticButton.setBackground(Color.WHITE);
 
 		// ==========================================
-		// Third block : Configure button
+		// Configure button
 		// ==========================================
 		JPanel fondConfigure = new JPanel();
 		fondConfigure.setLayout(new GridBagLayout());
 
 		JPanel panConfigure = new JPanel();
 		panConfigure.setLayout(new GridBagLayout());
-		// bouton configure
-		JButton btn_configuration = new JButton(WinLauncherText.getButtonConfigure());
+		// button configure
+		JButton btn_configuration = new JButton(bundle.getString("configure.button"));
 		btn_configuration.setPreferredSize(new Dimension(300, 300));
 		btn_configuration.addActionListener(launcherEvent);
 		panConfigure.add(btn_configuration);
 		fondConfigure.add(panConfigure);
 		// Custom
 		panConfigure.setBorder(BorderFactory.createLineBorder(Color.GREEN));
-		panConfigure.setBorder(BorderFactory.createTitledBorder("Configuration"));
+		panConfigure.setBorder(BorderFactory.createTitledBorder(bundle.getString("configuration.border")));
+
+		// ==========================================
+		// Kill Processus
+		// ==========================================
+		JPanel fondKillProcess = new JPanel();
+		fondKillProcess.setLayout(new GridLayout());
+		// button
+		JButton btn_killProcess = new JButton(bundle.getString("killprocess.pan"));
+		btn_killProcess.addActionListener(launcherEvent);
+		fondKillProcess.add(btn_killProcess);
 
 		// ==========================================
 		// add different pan to principal pan
@@ -165,26 +174,20 @@ public class WinLauncher extends JFrame implements ActionListener {
 		principalPan.add(fondPicture);
 		principalPan.add(fondElasticButton);
 		principalPan.add(fondConfigure);
+		principalPan.add(fondKillProcess);
 		this.setContentPane(principalPan);
 
 		// ==========================================
 		// Custom principal pan
 		// ==========================================
-		this.setTitle(WinLauncherText.getPrincipalPanTitle());
+		this.setTitle(bundle.getString("launcher.window.title"));
 		this.setSize(400, 500);
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setResizable(true);
 
-		// ==========================================
-
-	} // end of constructor
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-
-
-
+		
 	}
 
-} // end of class
+	
+}

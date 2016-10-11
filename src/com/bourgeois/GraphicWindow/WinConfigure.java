@@ -1,351 +1,205 @@
-package com.bourgeois.GraphicWindow;
+package com.bourgeois.graphicWindow;
 
 import java.awt.Color;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.HeadlessException;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.Properties;
+import java.util.ResourceBundle;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-
 import com.bourgeois.configuration.Configuration;
+import com.bourgeois.event.ConfigurationEvent;
 
-public class WinConfigure extends JFrame {
+public class WinConfigure extends JFrame implements ActionListener {
 	private static final long serialVersionUID = 1L;
+
+	Configuration configuration = new Configuration();
+	ConfigurationEvent event = new ConfigurationEvent();
+	Properties prop = new Properties();
+	File fProp = new File(Configuration.getPropertiesfile());
+	private static final ResourceBundle bundle = ResourceBundle.getBundle("domaine.ressources");
 
 	public WinConfigure() throws HeadlessException {
 		super();
 
-		Configuration conn = new Configuration();
-		Properties prop = new Properties();
-		File fProp = new File("config.properties");
-
-		// ==========================================
-		// create principal pan
-		// ==========================================
 		JPanel principalPanConf = new JPanel();
 		principalPanConf.setLayout(new GridLayout(4, 3));
 
 		// ==========================================
-		// first block : elasticsearch configuration
+		// elasticsearch configuration
 		// ==========================================
 		JPanel fondElastic = new JPanel();
-		fondElastic.setLayout(new GridLayout(3, 1));
+		fondElastic.setLayout(new GridLayout(2, 1));
 
-		// ******** Host Elastic *******
+		// ******** Host *******
 		JPanel panElasticSaisiHost = new JPanel();
 		panElasticSaisiHost.setLayout(new GridLayout(1, 3));
-
 		// Text
-		JLabel txt_elastic_host = new JLabel("your elasticsearch output host : ");
+		JLabel txt_elastic_host = new JLabel(bundle.getString("elastic.host.label"));
 		panElasticSaisiHost.add(txt_elastic_host);
 		fondElastic.add(panElasticSaisiHost);
 		// Field
-		JLabel sais_elastic_host = new JLabel(conn.getElasticHost());
+		JLabel sais_elastic_host = new JLabel(configuration.getElasticHost());
 		panElasticSaisiHost.add(sais_elastic_host);
 		fondElastic.add(panElasticSaisiHost);
 		// Buttons
-		JButton btn_elastic_host = new JButton("edit");
+		JButton btn_elastic_host = new JButton(bundle.getString("edit.button"));
+		btn_elastic_host.addActionListener(this);
 		panElasticSaisiHost.add(btn_elastic_host);
 		fondElastic.add(panElasticSaisiHost);
 
-		// ******** Elastic Location *******
+		// ******** Location *******
 		JPanel panElasticSaisiLoc = new JPanel();
 		panElasticSaisiLoc.setLayout(new GridLayout(1, 3));
 		// Text
-		JLabel txt_elastic_loc = new JLabel("your elasticsearch location  : ");
+		JLabel txt_elastic_loc = new JLabel(bundle.getString("elastic.location.label"));
 		panElasticSaisiLoc.add(txt_elastic_loc);
 		fondElastic.add(panElasticSaisiLoc);
 		// Field
-		JLabel sais_elastic_loc = new JLabel(conn.getElasticLocation());
-		panElasticSaisiLoc.add(sais_elastic_loc);
+		JLabel sais_elastic_host1 = new JLabel(configuration.getElasticLocation());
+		panElasticSaisiLoc.add(sais_elastic_host1);
 		fondElastic.add(panElasticSaisiLoc);
 		// Buttons
-		JButton btn_elastic_loc = new JButton("edit");
+		JButton btn_elastic_loc = new JButton(bundle.getString("edit.button"));
+		btn_elastic_loc.addActionListener(this);
 		panElasticSaisiLoc.add(btn_elastic_loc);
 		fondElastic.add(panElasticSaisiLoc);
-
 		// Custom
-		fondElastic.setBorder(BorderFactory.createTitledBorder("ElasticSearch"));
+		fondElastic.setBorder(BorderFactory.createTitledBorder(bundle.getString("elastic.border")));
 
 		// ==========================================
-		// second block : kibana configuration
+		// Kibana configuration
 		// ==========================================
-		// secondary pan
 		JPanel fondKibana = new JPanel();
 		fondKibana.setLayout(new GridLayout(2, 1));
 
-		// ******** Host Kibana *******
+		// ******** Host *******
 		JPanel panKibanaSaisiHost = new JPanel();
 		panKibanaSaisiHost.setLayout(new GridLayout(1, 3));
 		// Text
-		JLabel txt_kibana_host = new JLabel("your Kibana output host : ");
+		JLabel txt_kibana_host = new JLabel(bundle.getString("kibana.host.label"));
 		panKibanaSaisiHost.add(txt_kibana_host);
 		fondKibana.add(panKibanaSaisiHost);
 		// Field
-		JLabel sais_kibana_host = new JLabel(conn.getKibanaHost());
+		JLabel sais_kibana_host = new JLabel(configuration.getKibanaHost());
 		panKibanaSaisiHost.add(sais_kibana_host);
 		fondKibana.add(panKibanaSaisiHost);
 		// Buttons
-		JButton btn_kibana_host = new JButton("edit");
+		JButton btn_kibana_host = new JButton(bundle.getString("edit.button"));
+		btn_kibana_host.addActionListener(this);
 		panKibanaSaisiHost.add(btn_kibana_host);
 		fondKibana.add(panKibanaSaisiHost);
 
-		// ******** Kibana location *******
+		// ******** Location *******
 		JPanel panKibanaSaisiLoc = new JPanel();
 		panKibanaSaisiLoc.setLayout(new GridLayout(1, 3));
 		// Text
-		JLabel txt_kibana_loc = new JLabel("your Kibana location in computer : ");
+		JLabel txt_kibana_loc = new JLabel(bundle.getString("kibana.location.label"));
 		panKibanaSaisiLoc.add(txt_kibana_loc);
 		fondKibana.add(panKibanaSaisiLoc);
 		// Field
-		JLabel sais_kibana_loc = new JLabel(conn.getKibanaLocation());
+		JLabel sais_kibana_loc = new JLabel(configuration.getKibanaLocation());
 		panKibanaSaisiLoc.add(sais_kibana_loc);
 		fondKibana.add(panKibanaSaisiLoc);
 		// Button
-		JButton btn_kibana_loc = new JButton("edit");
+		JButton btn_kibana_loc = new JButton(bundle.getString("edit.button"));
+		btn_kibana_loc.addActionListener(this);
 		panKibanaSaisiLoc.add(btn_kibana_loc);
 		fondKibana.add(panKibanaSaisiLoc);
 		// Custom
 		fondKibana.setBorder(BorderFactory.createLineBorder(Color.BLUE));
-		fondKibana.setBorder(BorderFactory.createTitledBorder("Kibana"));
+		fondKibana.setBorder(BorderFactory.createTitledBorder(bundle.getString("kibana.border")));
 
 		// ==========================================
-		// third block : log
+		// Log
 		// ==========================================
-
 		JPanel fondLog = new JPanel();
 		fondLog.setLayout(new GridLayout(2, 1));
 
-		// ******** Host Elastic *******
 		JPanel panLogSaisi = new JPanel();
 		panLogSaisi.setLayout(new GridLayout(1, 3));
 		// Text
-		JLabel txt_log = new JLabel("your path log : ");
+		JLabel txt_log = new JLabel(bundle.getString("path.log.label"));
 		panLogSaisi.add(txt_log);
 		fondLog.add(panLogSaisi);
 		// Field
-		JLabel sai_log = new JLabel(conn.getPathLog());
+		JLabel sai_log = new JLabel(configuration.getPathLog());
 		panLogSaisi.add(sai_log);
 		fondLog.add(panLogSaisi);
 		// Buttons
-		JButton btn_log = new JButton("edit");
+		JButton btn_log = new JButton(bundle.getString("edit.button"));
+		btn_log.addActionListener(this);
 		panLogSaisi.add(btn_log);
 		fondLog.add(panLogSaisi);
 		// Custom
-		fondLog.setBorder(BorderFactory.createTitledBorder("Logger Configuration"));
+		fondLog.setBorder(BorderFactory.createTitledBorder(bundle.getString("log.border")));
 
 		// ==========================================
-		// fourth block : kibana configuration
+		// Exit
 		// ==========================================
-
 		JPanel fondValidate = new JPanel();
 		fondValidate.setLayout(new GridLayout(1, 1));
-
 		// Validate
 		JPanel panValidate = new JPanel();
 		panValidate.setLayout(new GridBagLayout());
-		JButton btn_validate = new JButton("Exit");
+		JButton btn_validate = new JButton(bundle.getString("save.button"));
+		btn_validate.addActionListener(this);
 		panValidate.add(btn_validate);
 		fondValidate.add(panValidate);
 
-		// ==========================================
-		// Action listeners
-		// ==========================================
-
-		// *********** elastic Host ***************** **********
-		btn_elastic_host.addActionListener(new ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent e) {
-				String saisie = JOptionPane.showInputDialog(null, "edit elasticsearch host", conn.getElasticHost());
-				sais_elastic_host.setText(saisie);
-				FileInputStream stream = null;
-				try {
-					stream = new FileInputStream(fProp);
-				} catch (FileNotFoundException e3) {
-					e3.printStackTrace();
-				}
-				try {
-					prop.load(stream);
-				} catch (IOException e3) {
-					e3.printStackTrace();
-				}
-
-				String taNouvelleValeur = saisie;
-				prop.setProperty("elastic.host", taNouvelleValeur);
-
-				FileOutputStream oStream = null;
-				try {
-					oStream = new FileOutputStream(fProp);
-				} catch (FileNotFoundException e2) {
-					e2.printStackTrace();
-				}
-				try {
-					prop.store(oStream, saisie);
-				} catch (IOException e1) {
-					e1.printStackTrace();
-				}
-			}
-		});
-
-		// *********** Elastic localization *****************
+		
+//		// =========================
+//		// Buttons edit option
+//		// =========================
 		btn_elastic_loc.addActionListener(new ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent e) {
-				String saisie = JOptionPane.showInputDialog(null, "edit elasticsearch location",
-						conn.getElasticLocation());
-				sais_elastic_loc.setText(saisie);
-				FileInputStream stream = null;
-				try {
-					stream = new FileInputStream(fProp);
-				} catch (FileNotFoundException e3) {
-
-					e3.printStackTrace();
-				}
-				try {
-					prop.load(stream);
-				} catch (IOException e3) {
-					e3.printStackTrace();
-				}
-
-				String taNouvelleValeur = saisie;
-				prop.setProperty("elastic.location", taNouvelleValeur);
-
-				FileOutputStream oStream = null;
-				try {
-					oStream = new FileOutputStream(fProp);
-				} catch (FileNotFoundException e2) {
-					e2.printStackTrace();
-				}
-				try {
-					prop.store(oStream, saisie);
-				} catch (IOException e1) {
-					e1.printStackTrace();
-				}
-			}
-		});
-
-		// *********** Log Configuration *****************
-		btn_log.addActionListener(new ActionListener() {
+		
+			ConfigurationEvent.editConfiguration(sais_elastic_host1,
+					configuration.getElasticLocation(), "elastic.location");
+		}
+			});
+	
+		btn_elastic_host.addActionListener(new ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent e) {
-				String userConfig = JOptionPane.showInputDialog(null, "edit log path", conn.getPathLog());
-				sai_log.setText(userConfig);
+			ConfigurationEvent.editConfiguration(sais_elastic_host, configuration.getElasticHost(),
+					"elastic.host");
 
-				FileInputStream stream = null;
-				try {
-					stream = new FileInputStream(fProp);
-				} catch (FileNotFoundException e3) {
-
-					e3.printStackTrace();
-				}
-				try {
-					prop.load(stream);
-				} catch (IOException e3) {
-					// TODO Auto-generated catch block
-					e3.printStackTrace();
-				}
-
-				String newValue = userConfig;
-				prop.setProperty("path.log", newValue);
-
-				FileOutputStream oStream = null;
-				try {
-					oStream = new FileOutputStream(fProp);
-				} catch (FileNotFoundException e2) {
-					e2.printStackTrace();
-				}
-				try {
-					prop.store(oStream, userConfig);
-				} catch (IOException e1) {
-					e1.printStackTrace();
-				}
-			}
+		}
 		});
-
-		// *********** Kibana Host *****************
-		btn_kibana_host.addActionListener(new ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent e) {
-				String userConfig = JOptionPane.showInputDialog(null, "edit elasticsearch host", conn.getKibanaHost());
-				sais_kibana_host.setText(userConfig);
-				FileInputStream stream = null;
-				try {
-					stream = new FileInputStream(fProp);
-				} catch (FileNotFoundException e3) {
-					e3.printStackTrace();
-				}
-				try {
-					prop.load(stream);
-				} catch (IOException e3) {
-					e3.printStackTrace();
-				}
-				String newValue = userConfig;
-				prop.setProperty("kibana.host", newValue);
-				FileOutputStream oStream = null;
-				try {
-					oStream = new FileOutputStream(fProp);
-				} catch (FileNotFoundException e2) {
-					e2.printStackTrace();
-				}
-				try {
-					prop.store(oStream, userConfig);
-				} catch (IOException e1) {
-
-					e1.printStackTrace();
-				}
-			}
-		});
-
-		// *********** Location Kibana *****************
+		
 		btn_kibana_loc.addActionListener(new ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent e) {
-				String saisie = JOptionPane.showInputDialog(null, "edit kibana location", conn.getKibanaLocation());
-				sais_kibana_loc.setText(saisie);
-
-				FileInputStream stream = null;
-				try {
-					stream = new FileInputStream(fProp);
-				} catch (FileNotFoundException e3) {
-					e3.printStackTrace();
-				}
-				try {
-					prop.load(stream);
-				} catch (IOException e3) {
-					e3.printStackTrace();
-				}
-				String taNouvelleValeur = saisie;
-				prop.setProperty("kibana.location", taNouvelleValeur);
-				FileOutputStream oStream = null;
-				try {
-					oStream = new FileOutputStream(fProp);
-				} catch (FileNotFoundException e2) {
-					e2.printStackTrace();
-				}
-				try {
-					prop.store(oStream, saisie);
-				} catch (IOException e1) {
-
-					e1.printStackTrace();
-				}
-
-			}
+			ConfigurationEvent.editConfiguration(sais_kibana_loc,
+					configuration.getKibanaLocation(), "kibana.location");
+		}});
+		
+		btn_kibana_host.addActionListener(new ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent e) {
+			ConfigurationEvent.editConfiguration(sais_kibana_host, configuration.getKibanaHost(),
+					"kibana.host");
+		}
 		});
-
-		// ******** Button validate **********
+		
+		btn_log.addActionListener(new ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent e) {
+			ConfigurationEvent.editConfiguration(sai_log, configuration.getKibanaHost(),
+					"kibana.host");
+		}
+		});
+		
 		btn_validate.addActionListener(new ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent e) {
-				setVisible(false);
-			}
+			
+		}
 		});
-
+		
 		// ==========================================
 		// add different pan to principal pan
 		// ==========================================
@@ -358,13 +212,18 @@ public class WinConfigure extends JFrame {
 		// ==========================================
 		// Custom principal pan
 		// ==========================================
-		this.setTitle("Elastic stack Configuration");
+		this.setTitle(bundle.getString("configure.window.title"));
 		this.setSize(800, 530);
 		this.setLocationRelativeTo(null);
 		this.setResizable(true);
 
-	} // end of constructor
 
+	}
 
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
 
-} // end of class
+	}
+
+}
