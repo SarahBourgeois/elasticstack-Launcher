@@ -13,7 +13,7 @@ import com.bourgeois.configuration.Configuration;
 
 public class LaucherItemEvent extends JFrame implements ActionListener {
 	private static final long serialVersionUID = 1L;
-	private static final ResourceBundle bundle = ResourceBundle.getBundle("domaine.ressources");
+	private static final ResourceBundle bundle = ResourceBundle.getBundle("displaytext.ressources");
 	Configuration conn = new Configuration();
 	Desktop desk;
 

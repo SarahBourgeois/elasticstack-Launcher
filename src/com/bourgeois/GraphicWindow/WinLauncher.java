@@ -35,7 +35,7 @@ import com.bourgeois.event.LauncherEvent;
 public class WinLauncher extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private static final String picturePath = "Ressources/nudge45.png";
-	final ResourceBundle bundle = ResourceBundle.getBundle("domaine.ressources");
+	final ResourceBundle bundle = ResourceBundle.getBundle("displaytext.ressources");
 	LauncherEvent launcherEvent = new LauncherEvent();
 	LaucherItemEvent launcherItem = new LaucherItemEvent();
 

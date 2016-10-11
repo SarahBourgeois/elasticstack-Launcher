@@ -20,7 +20,7 @@ public class LauncherEvent extends JFrame implements ActionListener {
 	private static final String commandKibana = "./kibana";
 	private static final String commandElastic = "./elasticsearch";
 	private static final String killCommand = "pkill -f elasticsearch";
-	private static final ResourceBundle bundle = ResourceBundle.getBundle("domaine.ressources");
+	private static final ResourceBundle bundle = ResourceBundle.getBundle("displaytext.ressources");
 
 
 	public void actionPerformed(ActionEvent e) {

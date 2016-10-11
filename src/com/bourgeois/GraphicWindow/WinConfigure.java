@@ -24,7 +24,7 @@ public class WinConfigure extends JFrame implements ActionListener {
 	ConfigurationEvent event = new ConfigurationEvent();
 	Properties prop = new Properties();
 	File fProp = new File(Configuration.getPropertiesfile());
-	private static final ResourceBundle bundle = ResourceBundle.getBundle("domaine.ressources");
+	private static final ResourceBundle bundle = ResourceBundle.getBundle("displaytext.ressources");
 
 	public WinConfigure() throws HeadlessException {
 		super();

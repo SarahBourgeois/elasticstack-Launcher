@@ -20,7 +20,7 @@ public class ConfigurationEvent extends JFrame {
 
 
 	Configuration configuration = new Configuration();
-	ResourceBundle bundle = ResourceBundle.getBundle("domaine.ressources");
+	ResourceBundle bundle = ResourceBundle.getBundle("displaytext.ressources");
 
 	public static void editConfiguration(JLabel label, String conf, String setProperty) {
 		Properties prop = new Properties();
