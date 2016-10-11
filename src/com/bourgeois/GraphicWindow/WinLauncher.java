@@ -3,11 +3,10 @@ package com.bourgeois.graphicWindow;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.HeadlessException;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -117,7 +116,7 @@ public class WinLauncher extends JFrame {
 		panElastic.add(btn_connect_elastic);
 		btn_connect_elastic.addActionListener(launcherEvent);
 		fondElasticButton.add(panElastic);
-		
+
 		// *** Kibana ***
 		JPanel panKibana = new JPanel();
 		panKibana.setLayout(new GridLayout(2, 1));
@@ -160,12 +159,22 @@ public class WinLauncher extends JFrame {
 		// Kill Processus
 		// ==========================================
 		JPanel fondKillProcess = new JPanel();
-		fondKillProcess.setLayout(new GridLayout());
+		fondKillProcess.setLayout(new GridBagLayout());
+		
+		JPanel panKillProcess = new JPanel();
+		panKillProcess.setLayout(new GridBagLayout());
 		// button
 		JButton btn_killProcess = new JButton(bundle.getString("killprocess.pan"));
+		btn_killProcess.setFont(new Font("Serif", Font.BOLD, 16));
+		btn_killProcess.setBackground(new Color(0,51,204));//import java.awt.Color;
+		btn_killProcess.setForeground(Color.darkGray);
+		btn_killProcess.setFocusPainted(true);
 		btn_killProcess.addActionListener(launcherEvent);
-		fondKillProcess.add(btn_killProcess);
-
+		panKillProcess.add(btn_killProcess);
+		fondKillProcess.add(panKillProcess);
+		fondKillProcess.setBorder(BorderFactory.createLineBorder(Color.blue));
+		fondKillProcess.setBorder(BorderFactory.createTitledBorder(bundle.getString("killprocess.pan")));
+		
 		// ==========================================
 		// add different pan to principal pan
 		// ==========================================
@@ -185,9 +194,5 @@ public class WinLauncher extends JFrame {
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setResizable(true);
-
-		
 	}
-
-	
 }

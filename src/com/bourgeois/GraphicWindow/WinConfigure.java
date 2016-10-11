@@ -31,7 +31,6 @@ public class WinConfigure extends JFrame implements ActionListener {
 
 		JPanel principalPanConf = new JPanel();
 		principalPanConf.setLayout(new GridLayout(4, 3));
-
 		// ==========================================
 		// elasticsearch configuration
 		// ==========================================
@@ -154,52 +153,42 @@ public class WinConfigure extends JFrame implements ActionListener {
 		panValidate.add(btn_validate);
 		fondValidate.add(panValidate);
 
-		
-//		// =========================
-//		// Buttons edit option
-//		// =========================
+		// =========================
+		// Buttons edit option
+		// =========================
 		btn_elastic_loc.addActionListener(new ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent e) {
-		
-			ConfigurationEvent.editConfiguration(sais_elastic_host1,
-					configuration.getElasticLocation(), "elastic.location");
-		}
-			});
-	
+				ConfigurationEvent.editConfiguration(sais_elastic_host1, configuration.getElasticLocation(),
+						"elastic.location");
+			}
+		});
 		btn_elastic_host.addActionListener(new ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent e) {
-			ConfigurationEvent.editConfiguration(sais_elastic_host, configuration.getElasticHost(),
-					"elastic.host");
-
-		}
+				ConfigurationEvent.editConfiguration(sais_elastic_host, configuration.getElasticHost(), "elastic.host");
+			}
 		});
-		
 		btn_kibana_loc.addActionListener(new ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent e) {
-			ConfigurationEvent.editConfiguration(sais_kibana_loc,
-					configuration.getKibanaLocation(), "kibana.location");
-		}});
-		
+				ConfigurationEvent.editConfiguration(sais_kibana_loc, configuration.getKibanaLocation(),
+						"kibana.location");
+			}
+		});
 		btn_kibana_host.addActionListener(new ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent e) {
-			ConfigurationEvent.editConfiguration(sais_kibana_host, configuration.getKibanaHost(),
-					"kibana.host");
-		}
+				ConfigurationEvent.editConfiguration(sais_kibana_host, configuration.getKibanaHost(), "kibana.host");
+			}
 		});
-		
 		btn_log.addActionListener(new ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent e) {
-			ConfigurationEvent.editConfiguration(sai_log, configuration.getKibanaHost(),
-					"kibana.host");
-		}
+				ConfigurationEvent.editConfiguration(sai_log, configuration.getKibanaHost(), "kibana.host");
+			}
 		});
-		
 		btn_validate.addActionListener(new ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent e) {
-			
-		}
+				close();
+			}
 		});
-		
+
 		// ==========================================
 		// add different pan to principal pan
 		// ==========================================
@@ -217,13 +206,14 @@ public class WinConfigure extends JFrame implements ActionListener {
 		this.setLocationRelativeTo(null);
 		this.setResizable(true);
 
+	}
 
+	public void close() {
+		this.dispose();
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-
 	}
 
 }

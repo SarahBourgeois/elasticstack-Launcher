@@ -1,6 +1,5 @@
 package com.bourgeois.event;
 
-import java.awt.Label;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -13,11 +12,14 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import com.bourgeois.configuration.Configuration;
 
+/**
+ * 
+ * @author Sarah Bourgeois
+ *
+ */
 
 public class ConfigurationEvent extends JFrame {
 	private static final long serialVersionUID = 1L;
-
-
 
 	Configuration configuration = new Configuration();
 	ResourceBundle bundle = ResourceBundle.getBundle("displaytext.ressources");
