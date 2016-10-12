@@ -33,7 +33,6 @@ import com.bourgeois.event.LauncherEvent;
 
 public class WinLauncher extends JFrame {
 	private static final long serialVersionUID = 1L;
-	private static final String picturePath = "Ressources/nudge45.png";
 	final ResourceBundle bundle = ResourceBundle.getBundle("displaytext.ressources");
 	LauncherEvent launcherEvent = new LauncherEvent();
 	LaucherItemEvent launcherItem = new LaucherItemEvent();
@@ -43,7 +42,6 @@ public class WinLauncher extends JFrame {
 
 		JPanel principalPan = new JPanel();
 		principalPan.setLayout(new GridLayout(5, 3));
-
 		// ======================
 		// Menu
 		// ======================
@@ -72,30 +70,24 @@ public class WinLauncher extends JFrame {
 
 		// item help
 		JMenuItem item_helpConfigure = new JMenuItem(bundle.getString("help.item"));
+		item_helpConfigure.addActionListener(launcherItem);
 		men_about.add(item_helpConfigure);
 		// about
 		JMenuItem item_about = new JMenuItem(bundle.getString("about.item"));
 		men_about.addSeparator();
+		item_about.addActionListener(launcherItem);
 		men_about.add(item_about);
 
 		// ==========================================
-		// Picture
+		// Title
 		// ==========================================
 		JPanel fondPicture = new JPanel();
-		fondPicture.setLayout(new GridLayout(1, 1));
+		fondPicture.setLayout(new GridBagLayout());
 
-		// picture
-		BufferedImage picture = null;
-		try {
-			picture = ImageIO.read(new File(picturePath));
-		} catch (IOException ie) {
-			ie.printStackTrace();
-		}
-		JLabel photo = new JLabel("");
-		photo.setHorizontalAlignment(SwingConstants.CENTER);
-		photo.setBounds(55, 224, 510, 850);
-		photo.setIcon(new ImageIcon(picture));
-		fondPicture.add(photo);
+		JLabel photo = new JLabel("Elastic Stack Launcher");
+		photo.setFont(new Font("Serif", Font.BOLD, 30));
+		photo.setBackground(Color.blue);
+    	fondPicture.add(photo);
 
 		// ==========================================
 		// Elasticsearch and Kibana
@@ -182,8 +174,9 @@ public class WinLauncher extends JFrame {
 		principalPan.add(fondMenu);
 		principalPan.add(fondPicture);
 		principalPan.add(fondElasticButton);
-		principalPan.add(fondConfigure);
 		principalPan.add(fondKillProcess);
+		principalPan.add(fondConfigure);
+		
 		this.setContentPane(principalPan);
 
 		// ==========================================

@@ -14,7 +14,6 @@ import javax.swing.JOptionPane;
 import com.bourgeois.configuration.Configuration;
 import com.bourgeois.graphicWindow.WinConfigure;
 
-
 public class LauncherEvent extends JFrame implements ActionListener {
 	private static final long serialVersionUID = 1L;
 	private static final String commandKibana = "./kibana";
@@ -22,12 +21,10 @@ public class LauncherEvent extends JFrame implements ActionListener {
 	private static final String killCommand = "pkill -f elasticsearch";
 	private static final ResourceBundle bundle = ResourceBundle.getBundle("displaytext.ressources");
 
-
 	public void actionPerformed(ActionEvent e) {
 		JButton btn = (JButton) (e.getSource());
 		Configuration conn = new Configuration();
-		
-		
+
 		if (btn.getText().equals(bundle.getString("openelastic.button"))) {
 			OpenStack(conn.getElasticHost());
 		}
@@ -42,7 +39,6 @@ public class LauncherEvent extends JFrame implements ActionListener {
 		}
 		if (btn.getText().equals(bundle.getString("configure.button"))) {
 			new WinConfigure().setVisible(true);
-
 		}
 		if (btn.getText().equals(bundle.getString("killprocess.pan"))) {
 			killStackProcess(killCommand, "Process kill");
@@ -72,8 +68,8 @@ public class LauncherEvent extends JFrame implements ActionListener {
 			Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
 		}
 	}
-	
-	public static void killStackProcess(String commandKill, String validation){
+
+	public static void killStackProcess(String commandKill, String validation) {
 		String command = commandKill;
 		try {
 			Runtime.getRuntime().exec(command);
@@ -82,8 +78,5 @@ public class LauncherEvent extends JFrame implements ActionListener {
 			e1.printStackTrace();
 		}
 	}
-	
 
 } // end of class
-
-
