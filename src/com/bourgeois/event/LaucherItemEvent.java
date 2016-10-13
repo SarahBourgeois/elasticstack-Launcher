@@ -35,6 +35,7 @@ public class LaucherItemEvent extends JFrame implements ActionListener {
 			try {
 				desk.open(new File(conn.getPathLog()));
 			} catch (IOException e1) {
+				JOptionPane.showMessageDialog(null, bundle.getString("error.logSystem"));
 				e1.printStackTrace();
 			}
 		}

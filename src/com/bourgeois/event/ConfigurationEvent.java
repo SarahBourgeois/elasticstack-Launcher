@@ -22,7 +22,7 @@ public class ConfigurationEvent extends JFrame {
 	private static final long serialVersionUID = 1L;
 
 	Configuration configuration = new Configuration();
-	ResourceBundle bundle = ResourceBundle.getBundle("displaytext.ressources");
+	static ResourceBundle bundle = ResourceBundle.getBundle("displaytext.ressources");
 
 	public static void editConfiguration(JLabel label, String conf, String setProperty) {
 		Properties prop = new Properties();
@@ -33,11 +33,13 @@ public class ConfigurationEvent extends JFrame {
 		try {
 			stream = new FileInputStream(fProp);
 		} catch (FileNotFoundException fnfe) {
+			JOptionPane.showMessageDialog(null, bundle.getString("error.streamFile"));
 			fnfe.printStackTrace();
 		}
 		try {
 			prop.load(stream);
 		} catch (IOException ioe) {
+			JOptionPane.showMessageDialog(null, bundle.getString("error.streamFile"));
 			ioe.printStackTrace();
 		}
 		String newValue = userConfig;
@@ -46,11 +48,13 @@ public class ConfigurationEvent extends JFrame {
 		try {
 			oStream = new FileOutputStream(fProp);
 		} catch (FileNotFoundException fnfe) {
+			JOptionPane.showMessageDialog(null, bundle.getString("error.streamFile"));
 			fnfe.printStackTrace();
 		}
 		try {
 			prop.store(oStream, userConfig);
 		} catch (IOException e) {
+			JOptionPane.showMessageDialog(null, bundle.getString("error.streamFile"));
 			e.printStackTrace();
 		}
 

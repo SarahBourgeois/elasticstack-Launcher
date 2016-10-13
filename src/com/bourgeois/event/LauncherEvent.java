@@ -51,6 +51,7 @@ public class LauncherEvent extends JFrame implements ActionListener {
 			Runtime.getRuntime().exec(command);
 			JOptionPane.showMessageDialog(null, validation);
 		} catch (IOException e1) {
+			JOptionPane.showMessageDialog(null, bundle.getString("error.runStack"));
 			e1.printStackTrace();
 		}
 	}
@@ -65,6 +66,7 @@ public class LauncherEvent extends JFrame implements ActionListener {
 				desktop.browse(url);
 			}
 		} catch (Exception ex) {
+			JOptionPane.showMessageDialog(null, bundle.getString("error.openDesktop"));
 			Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
 		}
 	}
@@ -75,6 +77,7 @@ public class LauncherEvent extends JFrame implements ActionListener {
 			Runtime.getRuntime().exec(command);
 			JOptionPane.showMessageDialog(null, validation);
 		} catch (IOException e1) {
+			JOptionPane.showMessageDialog(null, bundle.getString("error.killProcess"));
 			e1.printStackTrace();
 		}
 	}
