@@ -16,6 +16,12 @@ import org.apache.commons.io.FileUtils;
 import com.bourgeois.configuration.Configuration;
 import com.googlecode.htmlcompressor.compressor.HtmlCompressor;
 
+/**
+ * 
+ * @author Sarah Bourgeois
+ *
+ */
+
 public class LaucherItemEvent extends JFrame implements ActionListener {
 	private static final long serialVersionUID = 1L;
 	private static final ResourceBundle bundle = ResourceBundle.getBundle("displaytext.ressources");

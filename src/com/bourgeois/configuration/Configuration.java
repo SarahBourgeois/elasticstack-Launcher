@@ -5,6 +5,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+/**
+ * 
+ * @author Sarah Bourgeois
+ *
+ */
+
 public class Configuration {
 
 	private String elasticLocation;

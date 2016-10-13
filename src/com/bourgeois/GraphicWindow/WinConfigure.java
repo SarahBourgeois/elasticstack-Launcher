@@ -17,6 +17,12 @@ import javax.swing.JPanel;
 import com.bourgeois.configuration.Configuration;
 import com.bourgeois.event.ConfigurationEvent;
 
+/**
+ * 
+ * @author Sarah Bourgeois
+ *
+ */
+
 public class WinConfigure extends JFrame implements ActionListener {
 	private static final long serialVersionUID = 1L;
 

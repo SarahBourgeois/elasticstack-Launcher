@@ -14,6 +14,12 @@ import javax.swing.JOptionPane;
 import com.bourgeois.configuration.Configuration;
 import com.bourgeois.graphicWindow.WinConfigure;
 
+/**
+ * 
+ * @author Sarah Bourgeois
+ *
+ */
+
 public class LauncherEvent extends JFrame implements ActionListener {
 	private static final long serialVersionUID = 1L;
 	private static final String commandKibana = "./kibana";
