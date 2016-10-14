@@ -1,4 +1,4 @@
-package com.bourgeois.graphicWindow;
+package com.bourgeois.graphicwindow;
 
 import java.awt.BorderLayout;
 import java.awt.Color;

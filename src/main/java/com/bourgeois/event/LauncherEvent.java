@@ -12,7 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import com.bourgeois.configuration.Configuration;
-import com.bourgeois.graphicWindow.WinConfigure;
+import com.bourgeois.graphicwindow.WinConfigure;
 
 /**
  * 

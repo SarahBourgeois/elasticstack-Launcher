@@ -1,6 +1,6 @@
 package com.bourgeois;
 
-import com.bourgeois.graphicWindow.WinLauncher;
+import com.bourgeois.graphicwindow.WinLauncher;
 
 /**
  * 

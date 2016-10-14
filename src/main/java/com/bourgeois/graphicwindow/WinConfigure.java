@@ -1,4 +1,4 @@
-package com.bourgeois.graphicWindow;
+package com.bourgeois.graphicwindow;
 
 import java.awt.Color;
 import java.awt.GridBagLayout;
@@ -51,7 +51,7 @@ public class WinConfigure extends JFrame implements ActionListener {
 		panElasticSaisiHost.add(txt_elastic_host);
 		fondElastic.add(panElasticSaisiHost);
 		// Field
-		JLabel sais_elastic_host = new JLabel(configuration.getElasticHost());
+		final JLabel sais_elastic_host = new JLabel(configuration.getElasticHost());
 		panElasticSaisiHost.add(sais_elastic_host);
 		fondElastic.add(panElasticSaisiHost);
 		// Buttons
@@ -68,7 +68,7 @@ public class WinConfigure extends JFrame implements ActionListener {
 		panElasticSaisiLoc.add(txt_elastic_loc);
 		fondElastic.add(panElasticSaisiLoc);
 		// Field
-		JLabel sais_elastic_host1 = new JLabel(configuration.getElasticLocation());
+		final JLabel sais_elastic_host1 = new JLabel(configuration.getElasticLocation());
 		panElasticSaisiLoc.add(sais_elastic_host1);
 		fondElastic.add(panElasticSaisiLoc);
 		// Buttons
@@ -93,7 +93,7 @@ public class WinConfigure extends JFrame implements ActionListener {
 		panKibanaSaisiHost.add(txt_kibana_host);
 		fondKibana.add(panKibanaSaisiHost);
 		// Field
-		JLabel sais_kibana_host = new JLabel(configuration.getKibanaHost());
+		final JLabel sais_kibana_host = new JLabel(configuration.getKibanaHost());
 		panKibanaSaisiHost.add(sais_kibana_host);
 		fondKibana.add(panKibanaSaisiHost);
 		// Buttons
@@ -110,7 +110,7 @@ public class WinConfigure extends JFrame implements ActionListener {
 		panKibanaSaisiLoc.add(txt_kibana_loc);
 		fondKibana.add(panKibanaSaisiLoc);
 		// Field
-		JLabel sais_kibana_loc = new JLabel(configuration.getKibanaLocation());
+		final JLabel sais_kibana_loc = new JLabel(configuration.getKibanaLocation());
 		panKibanaSaisiLoc.add(sais_kibana_loc);
 		fondKibana.add(panKibanaSaisiLoc);
 		// Button
@@ -135,7 +135,7 @@ public class WinConfigure extends JFrame implements ActionListener {
 		panLogSaisi.add(txt_log);
 		fondLog.add(panLogSaisi);
 		// Field
-		JLabel sai_log = new JLabel(configuration.getPathLog());
+		final JLabel sai_log = new JLabel(configuration.getPathLog());
 		panLogSaisi.add(sai_log);
 		fondLog.add(panLogSaisi);
 		// Buttons
